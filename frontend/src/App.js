@@ -18,7 +18,7 @@ function App() {
       {route === "/" && <Acceuil onRouteChange={handleRouteChange} />}
       {route === "/con" && <Connexion />}
       {route === "/ins" && <Inscription />}
-      {route === "/Ent" && <Entreprise />}
+      {route === "/ent" && <Entreprise />}
     </div>
   );
 }

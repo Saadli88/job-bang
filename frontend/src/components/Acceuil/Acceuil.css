@@ -1,0 +1,95 @@
+.home-container {
+  padding: 1rem;
+  text-align: center; /* Centre le contenu de .home-container */
+}
+
+.main-content {
+  display: flex;
+  justify-content: space-between; /* Dispose l'image et les étapes côte à côte */
+  align-items: flex-start; /* Aligne les éléments au début */
+  margin-bottom: 50px; /* Ajoute un espace en bas de la section */
+}
+
+.image-container {
+  flex: 2; /* Prend plus d'espace par rapport aux étapes */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.decor-image {
+  max-width: 100%; /* Ajuste la largeur de l'image pour ne pas dépasser le conteneur */
+  height: auto; /* Conserve les proportions de l'image */
+  margin-top: 130px;
+  margin-right: 15px;
+  border-radius: 30px;
+}
+
+.steps-container {
+  flex: 1; /* Prend moins d'espace par rapport à l'image */
+  display: flex;
+  flex-direction: column; /* Dispose les conteneurs verticalement */
+  gap: 2rem; /* Espace entre les conteneurs */
+  padding: 1rem;
+  margin-top: 130px;
+}
+
+.step-container {
+  position: relative; /* Nécessaire pour le positionnement du texte explicatif */
+  background-color: #ffffff; /* Couleur de fond pour les conteneurs */
+  border: 1px solid #b9c6f483; /* Bordure pour les conteneurs */
+  padding: 1rem; /* Espacement interne */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(5, 3, 83, 0.1); /* Ombre légère pour un effet d'élévation */
+  overflow: hidden; /* Assure que le texte explicatif ne dépasse pas les bords du conteneur */
+  transition: opacity 0.3s; /* Transition pour l'opacité */
+  height: 150px; /* Hauteur fixe pour le conteneur */
+  display: flex;
+  align-items: center; /* Centre les éléments verticalement */
+}
+
+.step-number {
+  font-size: 3rem; /* Taille du numéro */
+  font-weight: bold; /* Gras pour le numéro */
+  color: #1611a0; /* Couleur du numéro */
+  margin-right:-4rem; /* Espace entre le numéro et le texte */
+  margin-left:2rem; /* Espace entre le numéro et le texte */
+}
+
+.step-text {
+  flex: 6; /* Prend le reste de l'espace disponible */
+  text-align: center; /* Centre le texte à l'intérieur du conteneur */
+  position: relative; /* Nécessaire pour le positionnement du texte explicatif */
+  transition: opacity 0.3s; /* Transition pour l'opacité */
+}
+
+.step-container::after {
+  content: attr(data-tooltip); /* Contenu du texte explicatif */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(149,190,194,255); /* Couleur de fond du texte explicatif */
+  color: #fff; /* Couleur du texte */
+  padding: 1rem;
+  border-radius: 8px; /* Coins arrondis */
+  opacity: 0; /* Masque le texte explicatif par défaut */
+  transition: opacity 0.3s; /* Transition pour l'opacité */
+  display: flex; /* Utilisation de Flexbox pour le centrage */
+  align-items: center; /* Aligne le texte verticalement */
+  justify-content: center; /* Centre le texte horizontalement */
+  text-align: center; /* Centre le texte */
+  box-sizing: border-box; /* Inclut le padding dans la hauteur et largeur totales */
+  overflow: auto; /* Permet le défilement si le texte dépasse */
+  z-index: 10; /* Assure que le texte est au-dessus des autres éléments */
+  pointer-events: none; /* Empêche les interactions avec le texte explicatif */
+}
+
+.step-container:hover .step-text {
+  opacity: 0; /* Masque le texte du conteneur au survol */
+}
+
+.step-container:hover::after {
+  opacity: 1; /* Affiche le texte explicatif au survol */
+}
