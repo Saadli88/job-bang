@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Acceuil from './components/Acceuil/Acceuil'; // Créez ce composant
+import Connexion from './components/Connexion/Connexion'; // Créez ce composant
+import Inscription from './components/Inscription/Inscription'; // Créez ce composant
+import Entreprise from './components/Entreprise/Entreprise'; // Créez ce composant
+import "./App.css"
 
 function App() {
+  const [route, setRoute] = useState(window.location.pathname);
+
+  const handleRouteChange = (newRoute) => {
+    setRoute(newRoute);
+    window.history.pushState({}, "", newRoute);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {route === "/" && <Acceuil onRouteChange={handleRouteChange} />}
+      {route === "/con" && <Connexion />}
+      {route === "/ins" && <Inscription />}
+      {route === "/ent" && <Entreprise />}
     </div>
   );
 }
