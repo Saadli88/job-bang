@@ -8,7 +8,7 @@ nav {
     color: white;
     display: flex;
     align-items: center;
-    padding: 10px 20px; /* Espacement intérieur */
+    padding: 0px 10px; /* Espacement intérieur */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
     z-index: 1000; /* Assure que la barre de navigation reste au-dessus des autres éléments */
   }
