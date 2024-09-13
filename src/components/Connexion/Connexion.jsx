@@ -16,6 +16,26 @@ function Connexion() {
     <div className="connexion-container">
       <h2>Connexion</h2>
       <form onSubmit={handleSubmit}>
+        <div className="input-group">
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="Entrez votre email"
+          />
+        </div>
+        <div className="input-group">
+          <label>Mot de passe</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            placeholder="Entrez votre mot de passe"
+          />
+        </div>
         <div className="user-type">
           <label>
             <input
@@ -36,26 +56,12 @@ function Connexion() {
             Entrepreneur
           </label>
         </div>
-        <div className="input-group">
-          <label>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="input-group">
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
         <button type="submit">Se connecter</button>
       </form>
+      <div className="signup">
+        <p>Pas encore de compte ?</p>
+        <button className="signup-btn">Créer un compte</button>
+      </div>
     </div>
   );
 }
