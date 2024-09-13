@@ -26,10 +26,12 @@ const Acceuil = () => {
                 <h2>Recherchez</h2>
               </div>
             </div>
+            
             <div className="step-container" data-tooltip="Postulez aux offres d'emploi que vous avez trouvées en envoyant votre CV et lettre de motivation.">
               <div className="step-number">③</div>
               <div className="step-text">
                 <h2>Postulez !</h2>
+                <h2>Postulez2 !</h2>
               </div>
             </div>
           </div>
