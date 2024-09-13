@@ -36,31 +36,12 @@ function Connexion() {
             placeholder="Entrez votre mot de passe"
           />
         </div>
-        <div className="user-type">
-          <label>
-            <input
-              type="radio"
-              value="candidat"
-              checked={userType === "candidat"}
-              onChange={() => setUserType("candidat")}
-            />
-            Candidat
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="entrepreneur"
-              checked={userType === "entrepreneur"}
-              onChange={() => setUserType("entrepreneur")}
-            />
-            Entrepreneur
-          </label>
-        </div>
+       
         <button type="submit">Se connecter</button>
       </form>
       <div className="signup">
         <p>Pas encore de compte ?</p>
-        <button className="signup-btn">Créer un compte</button>
+        <a href="./ins"><button className="signup-btn">Créer un compte</button></a>
       </div>
     </div>
   );

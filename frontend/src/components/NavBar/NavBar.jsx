@@ -5,7 +5,7 @@ import Logo from '../../images/logo.jpg';
 const NavBar = () => {
   const menuOptions = [
     { text: "Connexion", path: "./con" },
-    { text: "Inscription", path: "./ins" },
+
     { text: "Entreprise", path: "./ent" },
   ];
 

@@ -31,7 +31,7 @@ const Acceuil = () => {
               <div className="step-number">③</div>
               <div className="step-text">
                 <h2>Postulez !</h2>
-                <h2>Postulez2 !</h2>
+               
               </div>
             </div>
           </div>
