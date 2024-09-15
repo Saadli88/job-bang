@@ -40,7 +40,9 @@ function Connexion() {
               placeholder="Entrez votre mot de passe"
             />
           </div>
-          <button type="submit">Se connecter</button>
+          <a href="./cand">
+          <button className="login-btn">Se connecter</button>
+        </a>
         </form>
         <div className="signup">
           <p>Pas de compte avec nous ?</p>
