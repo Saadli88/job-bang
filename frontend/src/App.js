@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import Acceuil from './components/Acceuil/Acceuil'; // Créez ce composant
-import Connexion from './components/Connexion/Connexion'; // Créez ce composant
-import Inscription from './components/Inscription/Inscription'; // Créez ce composant
-import Entreprise from './components/Entreprise/Entreprise'; // Créez ce composant
+import Acceuil from './components/Acceuil/Acceuil'; 
+import Connexion from './components/Connexion/Connexion'; 
+import Inscription from './components/Inscription/Inscription'; 
+import { Entreprise } from "./components/Entreprise/Entreprise";
+import ConnexionEnt from './components/ConnexionEnt/ConnexionEnt'; 
+import InscriptionEnt from './components/InscriptionEnt/InscriptionEnt'; 
 import "./App.css"
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
       {route === "/con" && <Connexion />}
       {route === "/ins" && <Inscription />}
       {route === "/ent" && <Entreprise />}
+      {route === "/inscent" && <InscriptionEnt/>}
+      {route === "/conent" && <ConnexionEnt/>}
     </div>
   );
 }

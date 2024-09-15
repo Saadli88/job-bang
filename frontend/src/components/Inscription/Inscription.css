@@ -23,14 +23,15 @@
   .inscription-container {
     width: 350px;
     margin: 50px auto;
-    padding: 20px;
+    padding: 40px;
     background-color: #ffffff;
-    border: 1px solid #b9c6f483;
+    border: 1px solid rgba(166, 179, 225, 0.514);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(5, 3, 83, 0.1);
-    text-align: center;
+    margin-top :270px;
     position: relative;
     animation: fadeIn 0.8s ease-in-out;
+    text-align: center;
   }
   
   h2 {
@@ -40,6 +41,8 @@
     margin-bottom: 1rem;
     animation: slideIn 1s ease-out;
   }
+
+ 
   
   .input-group {
     margin-bottom: 1.5rem;
@@ -122,7 +125,7 @@
     right: -10px;
     bottom: -10px;
     border-radius: 12px;
-    background-color: rgba(149,190,194,255);
+    background-color:white;
     z-index: -1;
     opacity: 0;
     transition: opacity 0.3s;
@@ -132,3 +135,8 @@
     opacity: 0.2;
   }
   
+  .error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
