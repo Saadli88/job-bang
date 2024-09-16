@@ -5,10 +5,11 @@ function OffreEmploi() {
   const [sector, setSector] = useState("Technology"); // Default sector
   const [jobTitle, setJobTitle] = useState("");
   const [salary, setSalary] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Implement the job offer logic
+   
     console.log(`Job Title: ${jobTitle}, Sector: ${sector}, Salary: ${salary}`);
   };
 
@@ -47,6 +48,16 @@ function OffreEmploi() {
             type="number"
             value={salary}
             onChange={(e) => setSalary(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="input-group">
+          <label>Description</label>
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             required
           />
         </div>
