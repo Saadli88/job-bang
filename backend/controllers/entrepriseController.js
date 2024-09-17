@@ -1,0 +1,29 @@
+const Entreprise = require('../models/entreprise');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+exports.register = async (req, res) => {
+  const { nom, email, motDePasse } = req.body;
+  try {
+    const hashedPassword = await bcrypt.hash(motDePasse, 10);
+    const entreprise = new Entreprise({ nom, email, motDePasse: hashedPassword });
+    await entreprise.save();
+    res.status(201).json({ message: 'Entreprise créée' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.login = async (req, res) => {
+  const { email, motDePasse } = req.body;
+  try {
+    const entreprise = await Entreprise.findOne({ email });
+    if (!entreprise) return res.status(400).json({ message: 'Utilisateur non trouvé' });
+    const isMatch = await bcrypt.compare(motDePasse, entreprise.motDePasse);
+    if (!isMatch) return res.status(400).json({ message: 'Mot de passe incorrect' });
+    const token = jwt.sign({ id: entreprise._id }, 'tonSecret', { expiresIn: '1h' });
+    res.json({ token });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
