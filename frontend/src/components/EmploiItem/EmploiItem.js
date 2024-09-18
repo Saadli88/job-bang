@@ -3,9 +3,10 @@ import "./EmploiItem.css";
 
 export default function EmploiItem({
   sector,
-  jobTitle,
-  salary,
+  titre,
+  salaire,
   description,
+  entreprise
 }) {
   const [showDescription, setShowDescription] = useState(false);
 
@@ -26,9 +27,10 @@ export default function EmploiItem({
           </div>
         </div>
       )}
-      <span className="jobTitle">{jobTitle}</span>
+      <span className="jobTitle">{titre}</span>
+      <span className="jobEntreprise">{entreprise}</span>
       <span className="jobSector">{sector}</span>
-      <span className="jobSalary">{salary}</span> {/* Corrected salary display */}
+      <span className="jobSalary">{salaire}</span> {}
     </div>
   );
 }
