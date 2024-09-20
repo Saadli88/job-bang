@@ -11,6 +11,7 @@ function Connexion() {
     e.preventDefault();
     // Implement the login logic for candidate or entrepreneur
     console.log(`Logging in as ${userType} with email: ${email}`);
+    
   };
 
   return (
@@ -40,17 +41,19 @@ function Connexion() {
               placeholder="Entrez votre mot de passe"
             />
           </div>
+          </form>
           <a href="./cand">
           <button className="login-btn">Se connecter</button>
         </a>
-        </form>
+       
         <div className="signup">
           <p>Pas de compte avec nous ?</p>
           <br />
           <a href="./ins">
             <button className="signup-btn">Créer un compte</button>
-          </a>
+          </a> 
         </div>
+        
       </div>
     </div>
   );

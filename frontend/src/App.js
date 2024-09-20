@@ -6,6 +6,7 @@ import { Entreprise } from "./components/Entreprise/Entreprise";
 import ConnexionEnt from './components/ConnexionEnt/ConnexionEnt'; 
 import InscriptionEnt from './components/InscriptionEnt/InscriptionEnt'; 
 import Candidat from './components/Candidat/Candidat'; 
+import OffreEmploi from './components/OffreEmploi/OffreEmploi'; 
 import "./App.css"
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       {route === "/inscent" && <InscriptionEnt/>}
       {route === "/conent" && <ConnexionEnt/>}
       {route === "/cand" && <Candidat/>}
+      {route === "/off" && <OffreEmploi/>}
     </div>
   );
 }

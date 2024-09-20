@@ -64,8 +64,10 @@ function Inscription() {
             />
             {error && <div className="error-message">{error}</div>}
           </div>
+          </form>
+          <a href="./cand">
           <button type="submit">S'inscrire</button>
-        </form>
+        </a>
       </div>
     </div>
   );
