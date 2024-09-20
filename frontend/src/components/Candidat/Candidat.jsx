@@ -23,6 +23,10 @@ export const Candidat = () => {
   return (
     <div className="candidat-container">
       <NavBarCand />
+      <div className="candidat-titre">
+      Recherchez un emploi
+      </div>
+      <br></br>
       <form className="search-bar" onSubmit={handleSubmit}>
         <div className="input-groupp">
           <input 

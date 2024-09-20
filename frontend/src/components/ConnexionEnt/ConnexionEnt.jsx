@@ -3,13 +3,12 @@ import "./ConnexionEnt.css";
 import NavBar from '../NavBar/NavBar';
 
 function ConnexionEnt() {
-  const [userType] = useState("Enployeur"); 
+  const [userType] = useState("Employeur"); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   
     console.log(`Logging in as ${userType} with email: ${email}`);
   };
 
@@ -39,9 +38,12 @@ function ConnexionEnt() {
               required
               placeholder="Entrez votre mot de passe"
             />
-          </div>
+          </div> 
+          </form>
+          <a href="./ent">
           <button type="submit">Se connecter</button>
-        </form>
+          </a>
+        
         <div className="signup">
           <p>Pas de compte avec nous ?</p>
           <br />

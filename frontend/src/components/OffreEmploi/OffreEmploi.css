@@ -33,6 +33,7 @@
     text-align: center;
     position: relative;
     animation: fadeIn 0.8s ease-in-out;
+    margin-top: 130px;
   }
   
   h2 {

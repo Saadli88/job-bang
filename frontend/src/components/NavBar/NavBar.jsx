@@ -6,7 +6,7 @@ const NavBar = () => {
   const menuOptions = [
     { text: "Connexion", path: "./con" },
 
-    { text: "Entreprise", path: "./ent" },
+    { text: "Entreprise", path: "./conent" },
   ];
 
   return (

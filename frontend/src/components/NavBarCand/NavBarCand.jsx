@@ -4,7 +4,7 @@ import Logo from '../../images/logo.jpg';
 
 const NavBarCand = () => {
   const menuOptions = [
-    { text: "Acceuil", path: "./acc" },
+    { text: "Acceuil", path: "./" },
 
    
   ];
