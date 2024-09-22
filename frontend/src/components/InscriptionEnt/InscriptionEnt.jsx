@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./InscriptionEnt.css";
 import NavBar from '../NavBar/NavBar';
+import { useNavigate } from 'react-router-dom'; // Pour naviguer après la soumission
 
 function InscriptionEnt() {
   const [userType] = useState("Employeur");
@@ -12,21 +13,22 @@ function InscriptionEnt() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate(); // Pour rediriger après l'inscription réussie
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setError("*Les mots de passe ne correspondent pas.Veuillez réessayez.");
+      setError("*Les mots de passe ne correspondent pas. Veuillez réessayer.");
       return;
     }
     setError("");
     console.log(`Registering as ${userType} with company name: ${companyName}, name: ${name}, email: ${email}, phone: ${phone}, address: ${address}`);
+    navigate('/ent'); // Rediriger vers la page entreprise après l'inscription réussie
   };
 
   const handlePhoneChange = (e) => {
     const value = e.target.value;
- 
-    const cleanedValue = value.replace(/\D/g, '');
+    const cleanedValue = value.replace(/\D/g, ''); // Suppression des caractères non numériques
     setPhone(cleanedValue);
   };
 
@@ -65,15 +67,15 @@ function InscriptionEnt() {
             />
           </div>
           <div className="input-group">
-  <label>Téléphone</label>
-  <input
-    type="tel"
-    value={phone}
-    onChange={handlePhoneChange}
-    required
-    pattern="\d{10}" 
-    title="Veuillez entrer un numéro de téléphone valide (10 chiffres)"
-  />
+            <label>Téléphone</label>
+            <input
+              type="tel"
+              value={phone}
+              onChange={handlePhoneChange}
+              required
+              pattern="\d{10}" 
+              title="Veuillez entrer un numéro de téléphone valide (10 chiffres)"
+            />
           </div>
           <div className="input-group">
             <label>Adresse</label>
@@ -103,7 +105,7 @@ function InscriptionEnt() {
             />
             {error && <div className="error-message">{error}</div>}
           </div>
-          <button type="submit">S'inscrire</button>
+          <button type="submit" className="submit-btn">S'inscrire</button>
         </form>
       </div>
     </div>

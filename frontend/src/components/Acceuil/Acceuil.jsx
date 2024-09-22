@@ -5,6 +5,7 @@ import Deco from '../../images/deco.jpg'; // Importation correcte de l'image
 
 
 
+
 const Acceuil = () => {
   return (
     <div className="home-container">

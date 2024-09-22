@@ -80,7 +80,7 @@
   button {
     width: 100%;
     padding: 12px;
-    background-color: #0c6183;
+    background-color: #0c2e83;
     color: white;
     border: none;
     border-radius: 8px;
@@ -93,7 +93,7 @@
   }
   
   button:hover {
-    background-color: #0c6183;
+    background-color: #3976f0;
     transform: scale(1.05);
   }
   
@@ -120,7 +120,7 @@
   }
   
   .signup-btn {
-    background-color: #008CBA;
+    background-color:#202d8d;
     color: white;
     border: none;
     padding: 10px;
@@ -152,4 +152,18 @@
     opacity: 0.2;
   }
   
+  .submit {
+    margin-top: 2rem;
+    animation: fadeIn 1s ease-out;
+    animation-delay: 0.6s;
+    animation-fill-mode: both;
+    background-color:#202d8d;
+  }
+  .submit:hover {
+    background-color:#419bef;
+  }
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
   

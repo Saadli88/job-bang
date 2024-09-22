@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Inscription.css";
 import NavBar from '../NavBar/NavBar';
+import { useNavigate } from 'react-router-dom'; // Pour naviguer après la soumission
 
 function Inscription() {
   const [userType] = useState("candidat");
@@ -9,15 +10,17 @@ function Inscription() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate(); // Pour rediriger vers la page candidat
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setError("*Les mots de passe ne correspondent pas.Veuillez réessayez.");
+      setError("*Les mots de passe ne correspondent pas. Veuillez réessayer.");
       return;
     }
     setError("");
     console.log(`Registering as ${userType} with name: ${name}, email: ${email}`);
+    navigate('/cand'); // Rediriger après l'inscription réussie
   };
 
   return (
@@ -64,10 +67,8 @@ function Inscription() {
             />
             {error && <div className="error-message">{error}</div>}
           </div>
-          </form>
-          <a href="./cand">
-          <button type="submit">S'inscrire</button>
-        </a>
+          <button type="submit" className="submit-btn">S'inscrire</button>
+        </form>
       </div>
     </div>
   );

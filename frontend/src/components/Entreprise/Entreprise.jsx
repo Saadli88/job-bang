@@ -1,8 +1,16 @@
 import React from 'react';
 import NavBarCand from '../NavBarCand/NavBarCand';
 import './Entreprise.css';
+import { useNavigate } from 'react-router-dom';
 
 export const Entreprise = () => {
+  const navigate = useNavigate();
+  const connectedEmployerEmail = localStorage.getItem('connectedEmployerEmail');
+
+  const handleMesAnnoncesClick = () => {
+    navigate('/annp', { state: { connectedEmployerEmail } }); // Passer l'email à la nouvelle page
+  };
+
   return (
     <div className="entreprise-container">
       <NavBarCand />
@@ -13,7 +21,9 @@ export const Entreprise = () => {
             <li>
               <a href="./off" className="sidebar-link">Créer un poste</a>
             </li>
-            <li>Mes annonces</li>
+            <li onClick={handleMesAnnoncesClick} className="sidebar-link">
+              Mes annonces
+            </li>
           </ul>
         </aside>
         <div className="main-content2">

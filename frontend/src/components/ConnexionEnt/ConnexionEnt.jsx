@@ -1,15 +1,33 @@
 import React, { useState } from "react";
 import "./ConnexionEnt.css";
 import NavBar from '../NavBar/NavBar';
+import { useNavigate } from 'react-router-dom'; // Pour naviguer après la connexion
+import { EmployersList } from '../../data/employers'; // Assurez-vous que le chemin est correct
 
 function ConnexionEnt() {
-  const [userType] = useState("Employeur"); 
+  const [userType] = useState("Employeur");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // État pour le message d'erreur
+  const navigate = useNavigate(); // Pour rediriger après la connexion réussie
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`Logging in as ${userType} with email: ${email}`);
+    
+    // Vérifiez si l'email est dans la liste des employeurs
+    const employer = EmployersList.find(emp => emp.email === email);
+    // Après une connexion réussie
+    localStorage.setItem('connectedEmployerEmail', email);
+
+    
+    if (employer) {
+      console.log(`Logging in as ${userType} with email: ${email}`);
+      // Ici vous pouvez ajouter la vérification du mot de passe si nécessaire
+      // Si vous avez un mot de passe à vérifier, faites-le ici
+      navigate('/ent'); // Rediriger vers la page entreprise après connexion réussie
+    } else {
+      setErrorMessage("Email ou mot de passe incorrect."); // Définir le message d'erreur
+    }
   };
 
   return (
@@ -38,11 +56,10 @@ function ConnexionEnt() {
               required
               placeholder="Entrez votre mot de passe"
             />
-          </div> 
-          </form>
-          <a href="./ent">
-          <button type="submit">Se connecter</button>
-          </a>
+          </div>
+          <button className="login-btn"type="submit">Se connecter</button>
+          {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Afficher le message d'erreur */}
+        </form>
         
         <div className="signup">
           <p>Pas de compte avec nous ?</p>

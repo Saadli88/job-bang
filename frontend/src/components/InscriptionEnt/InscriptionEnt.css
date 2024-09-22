@@ -76,7 +76,7 @@
   button {
     width: 100%;
     padding: 12px;
-    background-color: #4CAF50;
+    background-color:#202d8d;
     color: white;
     border: none;
     border-radius: 8px;
@@ -102,9 +102,10 @@
     animation-fill-mode: both;
   }
   
-  .signup-btn {
-    background-color: #008CBA;
+  .submit-btn {
+    background-color:#202d8d;
     color: white;
+    width: 240px;
     border: none;
     padding: 10px;
     border-radius: 8px;
@@ -112,8 +113,8 @@
     transition: background-color 0.3s, transform 0.3s ease;
   }
   
-  .signup-btn:hover {
-    background-color: #007bb5;
+  .submit-btn:hover {
+    background-color: #4888cc;
     transform: scale(1.05);
   }
   

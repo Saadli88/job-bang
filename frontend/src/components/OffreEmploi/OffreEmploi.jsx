@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NavBarCand from "../NavBarCand/NavBarCand";
+import NavBarEnt from "../NavBarEnt/NavBarEnt";
 import "./OffreEmploi.css";
 
 function OffreEmploi() {
@@ -33,7 +33,7 @@ function OffreEmploi() {
 
   return (
     <div className="entreprise-container">
-      <NavBarCand />
+      <NavBarEnt />
       <div className="content">
         <aside className="sidebar">
           <ul>

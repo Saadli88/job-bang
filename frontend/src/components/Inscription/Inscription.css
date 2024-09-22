@@ -76,7 +76,7 @@
   button {
     width: 100%;
     padding: 12px;
-    background-color: #4CAF50;
+    background-color:#202d8d;
     color: white;
     border: none;
     border-radius: 8px;
@@ -103,7 +103,7 @@
   }
   
   .signup-btn {
-    background-color: #008CBA;
+    background-color:#202d8d;
     color: white;
     border: none;
     padding: 10px;
