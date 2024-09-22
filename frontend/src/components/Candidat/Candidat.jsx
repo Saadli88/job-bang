@@ -4,11 +4,10 @@ import NavBarCand from '../NavBarCand/NavBarCand';
 import { locations } from '../../data/locations';
 import EmploiItem from '../EmploiItem/EmploiItem';
 
-export const Candidat = () => {
+export const Candidat = ({ likedJobs, setLikedJobs }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [location, setLocation] = useState('');
   const [isSearched, setIsSearched] = useState(false);
-  const [likedJobs, setLikedJobs] = useState(new Set()); // État pour les postes likés
 
   const handleSearchTermChange = (e) => {
     setSearchTerm(e.target.value);
@@ -27,18 +26,6 @@ export const Candidat = () => {
     setSearchTerm('');
     setLocation('');
     setIsSearched(false);
-  };
-
-  const toggleLike = (jobTitle) => {
-    setLikedJobs(prevLikes => {
-      const newLikes = new Set(prevLikes);
-      if (newLikes.has(jobTitle)) {
-        newLikes.delete(jobTitle);
-      } else {
-        newLikes.add(jobTitle);
-      }
-      return newLikes;
-    });
   };
 
   return (
@@ -71,7 +58,7 @@ export const Candidat = () => {
       </div>
 
       <div className="emploi-results">
-        {isSearched && <EmploiItem searchTerm={searchTerm} location={location} toggleLike={toggleLike} likedJobs={likedJobs} />}
+        {isSearched && <EmploiItem searchTerm={searchTerm} location={location} likedJobs={likedJobs} setLikedJobs={setLikedJobs} />}
       </div>
     </div>
   );

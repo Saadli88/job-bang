@@ -98,3 +98,23 @@ button:hover {
   justify-content: space-between; /* Distribuer l'espace entre les éléments */
   margin: 10px 0; /* Espacement entre les groupes */
 }
+
+.emploi-container {
+  position: relative; /* Nécessaire pour positionner l'icône */
+  padding: 20px; /* Ajuste si nécessaire */
+  border: 1px solid #ccc; /* Exemple de style */
+  margin-bottom: 20px; /* Exemple de style */
+}
+
+.like-icon {
+  position: absolute;
+  top: 20px; /* Ajuste la distance du haut */
+  right: 20px; /* Ajuste la distance de droite */
+}
+.liked-jobs {
+  margin-top: 20px;
+}
+.liked-jobs ul {
+  list-style-type: none;
+  padding: 0;
+}
