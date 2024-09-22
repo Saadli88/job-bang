@@ -76,7 +76,8 @@
   button {
     width: 100%;
     padding: 12px;
-    background-color: #4CAF50;
+    background-color: #d6415d; /* Couleur rouge */
+  color: white;
     color: white;
     border: none;
     border-radius: 8px;
@@ -89,7 +90,7 @@
   }
   
   button:hover {
-    background-color: #0c6183;
+    background-color: #901723; /* Couleur rouge foncé */
     transform: scale(1.05);
   }
   

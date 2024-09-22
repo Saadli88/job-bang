@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBarCand from '../NavBarCand/NavBarCand';
+import NavBarEnt2 from '../NavBarEnt2/NavBarEnt2';
 import './Entreprise.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ export const Entreprise = () => {
 
   return (
     <div className="entreprise-container">
-      <NavBarCand />
+      <NavBarEnt2 />
       <div className="content">
         <aside className="sidebar">
           <ul>
@@ -27,7 +27,7 @@ export const Entreprise = () => {
           </ul>
         </aside>
         <div className="main-content2">
-          <h1>Bienvenue dans l'espace entreprise</h1>
+          <h1>Bienvenue dans l'espace entreprise !</h1>
         </div>
       </div>
     </div>
