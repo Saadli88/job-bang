@@ -51,7 +51,7 @@ export const EmploiList = [
   
   {
     nom_entreprise: "Tech Verte",
-    nom_poste: "Ingénieur en environnement",
+    nom_poste: "Ingénieur mécanique",
     salaire: "90 000 CAD",
     emplacement: "Sherbrooke",
     categorie: "Environnement",
@@ -127,7 +127,7 @@ export const EmploiList = [
   },
   {
     nom_entreprise: "Finances Futuristes",
-    nom_poste: "Conseiller en investissements",
+    nom_poste: "Consultant financier",
     salaire: "80 000 CAD",
     emplacement: "Québec",
     categorie: "Finance",

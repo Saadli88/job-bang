@@ -15,9 +15,7 @@ function ConnexionEnt() {
     e.preventDefault();
     
     // Vérifiez si l'email est dans la liste des employeurs
-    const employer = EmployersList.find(emp => emp.email === email);
-    // Après une connexion réussie
-    localStorage.setItem('connectedEmployerEmail', email);
+    const employer = EmployersList.find(emp => emp.email === email && emp.password === password);
 
     
     if (employer) {

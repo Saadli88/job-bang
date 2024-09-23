@@ -52,9 +52,6 @@ export const Candidat = ({ likedJobs, setLikedJobs }) => {
           </select>
         </div>
         <button type="button" onClick={handleSearchClick}>Rechercher</button>
-        {isSearched && (
-          <button className="reset-button" type="button" onClick={handleReset}>Retour</button>
-        )}
       </div>
 
       <div className="emploi-results">
