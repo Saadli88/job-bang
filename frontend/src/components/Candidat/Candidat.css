@@ -57,7 +57,7 @@
 .emploi-results {
   width: 400%;
   max-width: 1400px; /* Assure que les résultats ne dépassent pas la largeur du conteneur */
-  margin-top: -200px; /* Ajoute un espace au-dessus des résultats */
+  margin-top: -20px; /* Ajoute un espace au-dessus des résultats */
 }
 .reset-button {
   margin-left: 10px; /* Espace entre le bouton Rechercher et Retour */
