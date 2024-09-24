@@ -3,10 +3,10 @@ const router = express.Router();
 const emploiController = require('../controllers/emploiController');
 const authMiddleware = require('../middleware/authMiddleware');
 
-router.post('/create', authMiddleware, emploiController.createEmploi);
-router.get('/', authMiddleware, emploiController.getAllOffres);
-router.get('/:id', authMiddleware, emploiController.getOffreById);//?filtrer
-router.put('/:id', authMiddleware, emploiController.updateOffre);
-router.delete('/:id', authMiddleware, emploiController.deleteOffre);
+router.post('/create', authMiddleware, emploiController.ajouterEmploi);
+router.get('/', authMiddleware, emploiController.afficherEmplois);
+router.get('/:id', authMiddleware, emploiController.getEmploisByUserId);//?filtrer
+router.put('/:id', authMiddleware, emploiController.modifierEmploi);
+router.delete('/:id', authMiddleware, emploiController.suppEmploi);
 
 module.exports = router;

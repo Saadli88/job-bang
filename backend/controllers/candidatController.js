@@ -1,73 +1,73 @@
 const Candidat = require('../models/candidat');
+const HttpError = require('../handlers/error-handler');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-
-exports.register = async (req, res) => {
+const ajouterCandidat = async (req, res, next) => {
   const { nom, email, motDePasse } = req.body;
-  try {
 
+  try {
     const existingCandidat = await Candidat.findOne({ email });
     if (existingCandidat) {
-      return res.status(400).json({ message: 'Candidat déjà existant' });
+      return next(new HttpError('Candidat déjà existant', 400));
     }
 
-  
     const hashedPassword = await bcrypt.hash(motDePasse, 10);
-
-
-    const candidat = new Candidat({ nom, email, motDePasse: hashedPassword });
-    await candidat.save();
-
-    res.status(201).json({ message: 'Candidat créé avec succès', candidat });
+    const nouveauCandidat = new Candidat({ nom, email, motDePasse: hashedPassword });
+    
+    const savedCandidat = await nouveauCandidat.save();
+    res.status(201).json({ message: 'Candidat créé avec succès', candidat: savedCandidat });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    const error = new HttpError('Erreur lors de la création du candidat', 500);
+    return next(error);
   }
 };
 
-
-exports.login = async (req, res) => {
+const loginCandidat = async (req, res, next) => {
   const { email, motDePasse } = req.body;
-  try {
 
+  try {
     const candidat = await Candidat.findOne({ email });
     if (!candidat) {
-      return res.status(400).json({ message: 'Candidat non trouvé' });
+      return next(new HttpError('Candidat non trouvé', 400));
     }
 
     const isMatch = await bcrypt.compare(motDePasse, candidat.motDePasse);
     if (!isMatch) {
-      return res.status(400).json({ message: 'Mot de passe incorrect' });
+      return next(new HttpError('Mot de passe incorrect', 400));
     }
-
 
     const token = jwt.sign({ id: candidat._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.json({ token, candidat: { id: candidat._id, email: candidat.email } });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    const error = new HttpError('Erreur lors de la connexion', 500);
+    return next(error);
   }
 };
 
-exports.getCandidatById = async (req, res) => {
-  const { id } = req.params;
+const afficherCandidat = async (req, res, next) => {
+  const candidatId = req.params.id;
+
   try {
-    const candidat = await Candidat.findById(id);
+    const candidat = await Candidat.findById(candidatId);
     if (!candidat) {
-      return res.status(404).json({ message: 'Candidat non trouvé' });
+      return next(new HttpError('Candidat non trouvé', 404));
     }
     res.json(candidat);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    const error = new HttpError('Une erreur est survenue lors de la récupération du candidat', 500);
+    return next(error);
   }
 };
 
-exports.updateCandidat = async (req, res) => {
-  const { id } = req.params;
+const modifierCandidat = async (req, res, next) => {
+  const candidatId = req.params.id;
   const { email, motDePasse } = req.body;
+
   try {
-    const candidat = await Candidat.findById(id);
+    const candidat = await Candidat.findById(candidatId);
     if (!candidat) {
-      return res.status(404).json({ message: 'Candidat non trouvé' });
+      return next(new HttpError('Candidat non trouvé', 404));
     }
 
     if (email) candidat.email = email;
@@ -77,9 +77,17 @@ exports.updateCandidat = async (req, res) => {
       candidat.motDePasse = hashedPassword;
     }
 
-    await candidat.save();
-    res.json({ message: 'Candidat mis à jour avec succès', candidat });
+    const updatedCandidat = await candidat.save();
+    res.json({ message: 'Candidat mis à jour avec succès', candidat: updatedCandidat });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    const error = new HttpError('Erreur lors de la mise à jour du candidat', 500);
+    return next(error);
   }
+};
+
+module.exports = {
+  ajouterCandidat,
+  loginCandidat,
+  afficherCandidat,
+  modifierCandidat,
 };
