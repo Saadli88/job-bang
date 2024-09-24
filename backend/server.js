@@ -21,7 +21,23 @@ app.use('/api/candidats', candidatRoutes);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
+// Middleware to handle not found routes
+app.use((req, res, next) => {
+  const error = new Error("Route not found");
+  error.status = 404;
+  next(error);
+});
 
+// Middleware to handle errors
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.json({ message: err.message || "An unknown error occurred." });
+});
+
+// Root route
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to the backend" });
+});
 //Commande a faire dans le dossier backend
 //npm install express mongoose bcryptjs jsonwebtoken
 /** 

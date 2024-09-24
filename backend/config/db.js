@@ -1,16 +1,25 @@
 const mongoose = require('mongoose');
+const username = encodeURIComponent("user");
+const password = encodeURIComponent("myPassword123");
+
+
+
+let URI = `mongodb+srv://${username}:${password}@cluster0.ukbwj.mongodb.net/myJobbang`;
+
+
 
 
 const connectDB = async () => {
   try {
-    // A Configurer par pitié
-    await mongoose.connect(process.env.MONG_URI, {
+    
+    await mongoose.connect(URI, {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      dbName: "myJobBang"
     });
     console.log('MongoDB Connected');
   } catch (err) {
-    console.error(err.message);
+    console.error("error database" + err.message);
     process.exit(1);
   }
 };
