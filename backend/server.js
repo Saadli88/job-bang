@@ -1,8 +1,8 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const candidatRoutes = require('./routes/candidatRoutes');
-const entrepriseRoutes = require('./routes/entrepriseRoutes');
-const offreRoutes = require('./routes/offreRoutes');
+const employeurRoutes = require('./routes/employeurRoutes');
+const emploiRoutes = require('./routes/emploiRoutes');
 
 const app = express();
 
@@ -14,8 +14,8 @@ app.use(express.json());
 
 
 // Routes
-app.use('/api/entreprises', entrepriseRoutes);
-app.use('/api/offres', offreRoutes);
+app.use('/api/employeurs', employeurRoutes);
+app.use('/api/emplois', emploiRoutes);
 app.use('/api/candidats', candidatRoutes);
 
 const PORT = process.env.PORT || 5000;
