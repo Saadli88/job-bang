@@ -9,7 +9,7 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 );
-
+/* 
 import { data1 } from './data/candidats.js';
 import { data2 } from './data/emploi.js';
 import { data3 } from './data/employers.js';
@@ -38,4 +38,4 @@ async function sendData() {
   }
 }
 
-sendData();
+sendData();*/

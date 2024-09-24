@@ -24,7 +24,7 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 //Commande a faire dans le dossier backend
 //npm install express mongoose bcryptjs jsonwebtoken
-
+/** 
 // ajoute data
 app.post('/api/data', async (req, res) => {
     try {
@@ -45,4 +45,4 @@ app.post('/api/data', async (req, res) => {
       res.status(400).send(error);
     }
   });
-  
+ */ 
