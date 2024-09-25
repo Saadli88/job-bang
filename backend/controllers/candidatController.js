@@ -3,7 +3,6 @@ const HttpError = require('../handlers/error-handler');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-
 const ajouterCandidat = async (req, res, next) => {
   const { nom, email, motDePasse } = req.body;
 
@@ -14,7 +13,7 @@ const ajouterCandidat = async (req, res, next) => {
     }
 
     const hashedPassword = await bcrypt.hash(motDePasse, 10);
-    const nouveauCandidat = new Candidat({ nom, email, motDePasse: hashedPassword });
+    const nouveauCandidat = new Candidat({ nom, email: email.toLowerCase(), motDePasse: hashedPassword });
     
     const savedCandidat = await nouveauCandidat.save();
     res.status(201).json({ message: 'Candidat créé avec succès', candidat: savedCandidat });
@@ -28,7 +27,7 @@ const loginCandidat = async (req, res, next) => {
   const { email, motDePasse } = req.body;
 
   try {
-    const candidat = await Candidat.findOne({ email });
+    const candidat = await Candidat.findOne({ email: email.toLowerCase() });
     if (!candidat) {
       return next(new HttpError('Candidat non trouvé', 400));
     }
@@ -46,7 +45,6 @@ const loginCandidat = async (req, res, next) => {
   }
 };
 
-
 const afficherCandidat = async (req, res, next) => {
   const candidatId = req.params.id;
 
@@ -62,7 +60,6 @@ const afficherCandidat = async (req, res, next) => {
   }
 };
 
-
 const modifierCandidat = async (req, res, next) => {
   const candidatId = req.params.id;
   const { email, motDePasse } = req.body;
@@ -73,16 +70,8 @@ const modifierCandidat = async (req, res, next) => {
       return next(new HttpError('Candidat non trouvé', 404));
     }
 
+    if (email) candidat.email = email.toLowerCase();
 
-    if (email) {
-      const existingEmail = await Candidat.findOne({ email });
-      if (existingEmail) {
-        return next(new HttpError('Cet email est déjà utilisé', 400));
-      }
-      candidat.email = email;
-    }
-
- 
     if (motDePasse) {
       const hashedPassword = await bcrypt.hash(motDePasse, 10);
       candidat.motDePasse = hashedPassword;
@@ -96,9 +85,57 @@ const modifierCandidat = async (req, res, next) => {
   }
 };
 
+const likeEmploi = async (req, res, next) => {
+  const candidatId = req.params.id;
+  const { emploiId } = req.body;
+
+  try {
+    const candidat = await Candidat.findById(candidatId);
+    if (!candidat) {
+      return next(new HttpError('Candidat non trouvé', 404));
+    }
+
+    if (!candidat.liked.includes(emploiId)) {
+      candidat.liked.push(emploiId);
+      await candidat.save();
+      res.json({ message: 'Emploi aimé avec succès', liked: candidat.liked });
+    } else {
+      return next(new HttpError('Cet emploi est déjà aimé', 400));
+    }
+  } catch (err) {
+    const error = new HttpError('Erreur lors de l\'ajout de l\'emploi aimé', 500);
+    return next(error);
+  }
+};
+
+const unlikeEmploi = async (req, res, next) => {
+  const candidatId = req.params.id;
+  const { emploiId } = req.body;
+
+  try {
+    const candidat = await Candidat.findById(candidatId);
+    if (!candidat) {
+      return next(new HttpError('Candidat non trouvé', 404));
+    }
+
+    if (candidat.liked.includes(emploiId)) {
+      candidat.liked = candidat.liked.filter(id => id.toString() !== emploiId);
+      await candidat.save();
+      res.json({ message: 'Emploi retiré des likes avec succès', liked: candidat.liked });
+    } else {
+      return next(new HttpError('Cet emploi n\'est pas aimé', 400));
+    }
+  } catch (err) {
+    const error = new HttpError('Erreur lors de la suppression de l\'emploi aimé', 500);
+    return next(error);
+  }
+};
+
 module.exports = {
   ajouterCandidat,
   loginCandidat,
   afficherCandidat,
   modifierCandidat,
+  likeEmploi,
+  unlikeEmploi,
 };
