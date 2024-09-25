@@ -1,5 +1,6 @@
 const HttpError = require("../handlers/error-handler");
 const Emploi = require("../models/emploi");
+const Employeur = require("../models/employeur"); // Ensure you import the Employer model
 
 // Get all emplois
 const afficherEmplois = async (req, res, next) => {
@@ -44,7 +45,8 @@ const getEmploisByUserId = async (req, res, next) => {
 
 // Add a new emploi
 const ajouterEmploi = async (req, res, next) => {
-  const { nom_entreprise, nom_poste, salaire, emplacement, categorie, email_employeur } = req.body;
+  const { nom_entreprise, nom_poste, salaire, emplacement, categorie, email_employeur, employeurId } = req.body;
+
   const nouvelEmploi = new Emploi({
     nom_entreprise,
     nom_poste,
@@ -52,11 +54,21 @@ const ajouterEmploi = async (req, res, next) => {
     emplacement,
     categorie,
     email_employeur,
+    assignee: employeurId, // Link to the employer
   });
 
   try {
-    await nouvelEmploi.save();
-    res.status(201).json({ message: "Emploi ajouté avec succès", emploi: nouvelEmploi });
+    // Save the new job
+    const savedEmploi = await nouvelEmploi.save();
+
+    // Update the employer's document to add the new job to their list
+    await Employeur.findByIdAndUpdate(
+      employeurId,
+      { $push: { emplois: savedEmploi._id } }, // Add the new emploi ID to the employer's jobs list
+      { new: true }
+    );
+
+    res.status(201).json({ message: "Emploi ajouté avec succès", emploi: savedEmploi });
   } catch (err) {
     const error = new HttpError("Création en base de données en erreur", 500);
     return next(error);
@@ -69,19 +81,18 @@ const modifierEmploi = async (req, res, next) => {
   const nouvellesDonnees = req.body;
 
   try {
-    const emploi = await Emploi.findByIdAndUpdate(emploiId, nouvellesDonnees, {
-      new: true,
-    });
+    const emploi = await Emploi.findByIdAndUpdate(emploiId, nouvellesDonnees, { new: true });
     if (!emploi) {
       return res.status(404).json({ message: "Emploi non trouvé" });
     }
-    res.json({ message: "Emploi modifié avec succès" });
+    res.json({ message: "Emploi modifié avec succès", emploi });
   } catch (err) {
     const error = new HttpError("Erreur lors de la modification de l'emploi", 500);
     return next(error);
   }
 };
 
+// Delete an emploi
 // Delete an emploi
 const suppEmploi = async (req, res, next) => {
   const emploiId = req.params.id;
@@ -91,12 +102,21 @@ const suppEmploi = async (req, res, next) => {
     if (!deletedEmploi) {
       return res.status(404).json({ message: "Emploi non trouvé" });
     }
+
+    const result = await Employeur.updateMany(
+      { emplois: emploiId },
+      { $pull: { emplois: emploiId } }
+    );
+
+    console.log(`Removed emploi from employeur: ${result.modifiedCount} employeur(s) updated.`);
+
     res.json({ message: "Emploi supprimé avec succès" });
   } catch (err) {
     const error = new HttpError("Erreur lors de la suppression de l'emploi", 500);
     return next(error);
   }
 };
+
 
 module.exports = {
   afficherEmplois,
