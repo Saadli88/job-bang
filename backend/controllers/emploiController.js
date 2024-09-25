@@ -1,8 +1,7 @@
 const HttpError = require("../handlers/error-handler");
 const Emploi = require("../models/emploi");
-const Employeur = require("../models/employeur"); // Ensure you import the Employer model
+const Employeur = require("../models/employeur");
 
-// Get all emplois
 const afficherEmplois = async (req, res, next) => {
   try {
     const emplois = await Emploi.find({});
@@ -26,7 +25,7 @@ const afficherEmplois = async (req, res, next) => {
   }
 };
 
-// Get emplois by a specific user (if applicable)
+
 const getEmploisByUserId = async (req, res, next) => {
   const userId = req.params.uid;
   try {
@@ -43,7 +42,7 @@ const getEmploisByUserId = async (req, res, next) => {
   }
 };
 
-// Add a new emploi
+
 const ajouterEmploi = async (req, res, next) => {
   const { nom_entreprise, nom_poste, salaire, emplacement, categorie, email_employeur, employeurId } = req.body;
 
@@ -54,17 +53,17 @@ const ajouterEmploi = async (req, res, next) => {
     emplacement,
     categorie,
     email_employeur,
-    assignee: employeurId, // Link to the employer
+    assignee: employeurId, 
   });
 
   try {
-    // Save the new job
+    
     const savedEmploi = await nouvelEmploi.save();
 
-    // Update the employer's document to add the new job to their list
+   
     await Employeur.findByIdAndUpdate(
       employeurId,
-      { $push: { emplois: savedEmploi._id } }, // Add the new emploi ID to the employer's jobs list
+      { $push: { emplois: savedEmploi._id } }, 
       { new: true }
     );
 
@@ -92,7 +91,6 @@ const modifierEmploi = async (req, res, next) => {
   }
 };
 
-// Delete an emploi
 // Delete an emploi
 const suppEmploi = async (req, res, next) => {
   const emploiId = req.params.id;

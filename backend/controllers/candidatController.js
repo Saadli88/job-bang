@@ -3,7 +3,7 @@ const HttpError = require('../handlers/error-handler');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// Add a new candidate
+
 const ajouterCandidat = async (req, res, next) => {
   const { nom, email, motDePasse } = req.body;
 
@@ -24,7 +24,6 @@ const ajouterCandidat = async (req, res, next) => {
   }
 };
 
-// Login a candidate
 const loginCandidat = async (req, res, next) => {
   const { email, motDePasse } = req.body;
 
@@ -47,7 +46,7 @@ const loginCandidat = async (req, res, next) => {
   }
 };
 
-// Get a candidate's information
+
 const afficherCandidat = async (req, res, next) => {
   const candidatId = req.params.id;
 
@@ -63,7 +62,7 @@ const afficherCandidat = async (req, res, next) => {
   }
 };
 
-// Update a candidate's information
+
 const modifierCandidat = async (req, res, next) => {
   const candidatId = req.params.id;
   const { email, motDePasse } = req.body;
@@ -74,7 +73,7 @@ const modifierCandidat = async (req, res, next) => {
       return next(new HttpError('Candidat non trouvé', 404));
     }
 
-    // Update email if provided
+
     if (email) {
       const existingEmail = await Candidat.findOne({ email });
       if (existingEmail) {
@@ -83,7 +82,7 @@ const modifierCandidat = async (req, res, next) => {
       candidat.email = email;
     }
 
-    // Update password if provided
+ 
     if (motDePasse) {
       const hashedPassword = await bcrypt.hash(motDePasse, 10);
       candidat.motDePasse = hashedPassword;
