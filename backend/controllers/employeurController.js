@@ -94,9 +94,28 @@ const updateEmployeur = async (req, res, next) => {
   }
 };
 
+const getAllEmploi = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    
+    const employeur = await Employeur.findById(id).populate('offres');
+
+    if (!employeur) {
+      return next(new HttpError('Employeur non trouvé.', 404));
+    }
+
+    res.json({ offres: employeur.offres });
+  } catch (err) {
+    const error = new HttpError("Impossible de récupérer la liste des offres d'emploi.", 500);
+    return next(error);
+  }
+};
+
 module.exports = {
   register,
   login,
   getEmployeurById,
   updateEmployeur,
+  getAllEmploi,
 };
