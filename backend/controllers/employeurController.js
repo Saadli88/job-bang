@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const register = async (req, res, next) => {
-  const { nom, email, motDePasse, phoneNumber, address } = req.body;
+  const { nom, email, mot_de_passe} = req.body;
 
   try {
     const existingEmployeur = await Employeur.findOne({ email });
@@ -12,14 +12,12 @@ const register = async (req, res, next) => {
       return next(new HttpError('Cet email est déjà utilisé.', 400));
     }
 
-    const hashedPassword = await bcrypt.hash(motDePasse, 10);
+    const hashedPassword = await bcrypt.hash(mot_de_passe, 10);
 
     const employeur = new Employeur({
       nom,
       email,
-      motDePasse: hashedPassword,
-      phoneNumber,
-      address,
+      mot_de_passe: hashedPassword,
     });
 
     await employeur.save();
@@ -31,7 +29,7 @@ const register = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
-  const { email, motDePasse } = req.body;
+  const { email, mot_de_passe } = req.body;
 
   try {
     const employeur = await Employeur.findOne({ email });
@@ -39,7 +37,7 @@ const login = async (req, res, next) => {
       return next(new HttpError('Utilisateur non trouvé.', 400));
     }
 
-    const isMatch = await bcrypt.compare(motDePasse, employeur.motDePasse);
+    const isMatch = await bcrypt.compare(mot_de_passe, employeur.mot_de_passe);
     if (!isMatch) {
       return next(new HttpError('Mot de passe incorrect.', 400));
     }
@@ -71,7 +69,7 @@ const getEmployeurById = async (req, res, next) => {
 
 const updateEmployeur = async (req, res, next) => {
   const { id } = req.params;
-  const { nom, email, motDePasse, phoneNumber, address } = req.body;
+  const { nom, email, mot_de_passe} = req.body;
 
   try {
     const employeur = await Employeur.findById(id);
@@ -82,12 +80,10 @@ const updateEmployeur = async (req, res, next) => {
   
     if (nom) employeur.nom = nom;
     if (email) employeur.email = email;
-    if (phoneNumber) employeur.phoneNumber = phoneNumber;
-    if (address) employeur.address = address;
 
-    if (motDePasse) {
-      const hashedPassword = await bcrypt.hash(motDePasse, 10);
-      employeur.motDePasse = hashedPassword;
+    if (mot_de_passe) {
+      const hashedPassword = await bcrypt.hash(mot_de_passe, 10);
+      employeur.mot_de_passe = hashedPassword;
     }
 
     const updatedEmployeur = await employeur.save();

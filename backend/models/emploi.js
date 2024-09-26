@@ -7,7 +7,6 @@ const EmploiSchema = new mongoose.Schema({
   emplacement: { type: String, required: true },
   categorie: { type: String, required: true },
   email_employeur: { type: String, required: true, lowercase: true, trim: true }, 
-  employeur_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Employeur' } 
 }); 
 
 module.exports = mongoose.model('Emploi', EmploiSchema);
