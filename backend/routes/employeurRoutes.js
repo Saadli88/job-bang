@@ -4,8 +4,8 @@ const employeurController = require('../controllers/employeurController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 
-router.post('/register', employeurController.register); 
-router.post('/login', employeurController.login); 
+router.post('/ins', employeurController.register); 
+router.post('/con', employeurController.login); 
 router.get('/:id', authMiddleware, employeurController.getEmployeurById); 
 router.put('/:id', authMiddleware, employeurController.updateEmployeur); 
 module.exports = router;

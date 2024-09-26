@@ -5,7 +5,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 router.post('/create', authMiddleware, emploiController.ajouterEmploi); 
 router.get('/', authMiddleware, emploiController.afficherEmplois);
-router.get('/user/:id', authMiddleware, emploiController.getEmploisByUserId); 
+router.get('/cand/:id', authMiddleware, emploiController.getEmploisByUserId); 
 router.put('/:id', authMiddleware, emploiController.modifierEmploi); 
 router.delete('/:id', authMiddleware, emploiController.suppEmploi); 
 

@@ -34,6 +34,7 @@ function App() {
         path="/off" 
         element={<OffreEmploi />} 
       />
+   
       <Route 
         path="/emp" 
         element={<EmploiItem likedJobs={likedJobs} setLikedJobs={setLikedJobs} />} 
@@ -42,6 +43,7 @@ function App() {
         path="/like" 
         element={<PostesLiker likedJobs={likedJobs} />} 
       />
+      
       <Route path="/ann" element={<MesAnnonces />} />
       <Route path="/annp" element={<MesAnnoncesPage />} />
     </Routes>
